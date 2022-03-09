@@ -1,0 +1,18 @@
+version: '3.1'
+services: 
+    db:
+        image: 'mariadb:10.3.5'
+        environment: 
+            MYSQL_ROOT_PASSWORD: 'contrasenia'
+            TZ: 'America/El_Salvador'
+        ports: 
+            - 3306:3306
+        volumes: 
+            - ./datos/base:/var/lib/mysql
+    adminer:
+        image: 'adminer:latest'
+        volumes: 
+            - ./datos/css/adminer.css:/var/www/html/adminer.css
+        ports: 
+            - 3307:8080
+
