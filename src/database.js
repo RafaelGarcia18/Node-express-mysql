@@ -1,5 +1,4 @@
 const mysql = require("mysql");
-const Connection = require("mysql/lib/Connection");
 const { database } = require("./keys");
 const { promisify } = require("util");
 

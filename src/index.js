@@ -5,11 +5,13 @@ const path = require("path");
 const flash = require("connect-flash");
 const session = require("express-session");
 const mysqlStore = require("express-mysql-session");
+const passport = require("passport");
 
 const { database } = require("./keys");
 
 //initializations
 const app = express();
+require("./lib/passport");
 
 //settings
 app.set("port", process.env.PORT || 4000);
@@ -39,6 +41,8 @@ app.use(flash());
 app.use(morgan("dev"));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
+app.use(passport.initialize());
+app.use(passport.session());
 
 //Global variables
 app.use((req, res, next) => {
@@ -47,7 +51,7 @@ app.use((req, res, next) => {
 });
 
 //Routes
-app.use(require("./routes"));
+app.use(require("./routes/index"));
 app.use(require("./routes/authentications"));
 app.use("/links", require("./routes/links"));
 
